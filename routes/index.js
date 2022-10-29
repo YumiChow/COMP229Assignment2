@@ -10,6 +10,13 @@ import jwt from 'jsonwebtoken'
 import Contact from '../db/models/contact.js';
 const router = express.Router();
 
+const auth = function (req, res, next) {
+  if (!req.cookies.token || !jwt.verify(req.cookies.token, 'asdfghjklsdsds')) {
+    return res.redirect("/login");
+  }
+  next();
+}
+
 router.all('/', (req, res, next) => {
   res.redirect('/login')
 })
@@ -35,7 +42,8 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-router.get('/contact', async (req, res, next) => {
+router.get('/contact', auth, async (req, res, next) => {
+  console.log(2);
   const contacts = await Contact.find({})
   console.log(contacts);
   res.render('contact', {
@@ -44,7 +52,7 @@ router.get('/contact', async (req, res, next) => {
   });
 });
 
-router.get('/update/:name', async (req, res, next) => {
+router.get('/update/:name', auth, async (req, res, next) => {
   const contact = await Contact.findOne({
     name: req.params.name
   })
@@ -54,7 +62,7 @@ router.get('/update/:name', async (req, res, next) => {
   });
 });
 
-router.post('/update', async (req, res, next) => {
+router.post('/update', auth, async (req, res, next) => {
   console.log(req.body);
   const contact = await Contact.updateOne({
     _id: req.body._id
@@ -62,7 +70,7 @@ router.post('/update', async (req, res, next) => {
   res.redirect('/contact')
 });
 
-router.get('/delete/:name', async (req, res, next) => {
+router.get('/delete/:name', auth, async (req, res, next) => {
   const contact = await Contact.remove({
     name: req.params.name
   })
