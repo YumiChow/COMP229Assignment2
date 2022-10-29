@@ -8,7 +8,7 @@ import express from "express"
 import path from "path"
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-
+import jwt from 'jsonwebtoken'
 import indexRouter from './routes/index.js'
 import { fileURLToPath } from "url"
 import './db/index.js'
@@ -24,6 +24,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(function (req, res, next) {
+  var url = req.originalUrl;
+  if (url != "/login" && (!req.cookies.token || !jwt.verify(req.cookies.token))) {
+    return res.redirect("/login");
+  }
+  next();
+});
 app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

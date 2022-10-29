@@ -10,6 +10,9 @@ import jwt from 'jsonwebtoken'
 import Contact from '../db/models/contact.js';
 const router = express.Router();
 
+router.all('/', (req, res, next) => {
+  res.redirect('/login')
+})
 router.get('/login', (req, res, next) => {
   res.render('login');
 });
