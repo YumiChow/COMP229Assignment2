@@ -1,0 +1,46 @@
+<% include ./common/header.ejs %>
+  <div class="container">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">Name</th>
+              <th class="text-center">Number</th>
+              <th class="text-center">Email Address</th>
+              <th class="text-center"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let count=0; count < contacts.length; count++) { %>
+              <tr>
+                <td class="text-center">
+                  <%= contacts[count].name %>
+                </td>
+                <td class="text-center">
+                  <%= contacts[count].number %>
+                </td>
+                <td class="text-center">
+                  <%= contacts[count].email %>
+                </td>
+
+                <td class="text-center">
+                  <a href="/update/<%= contacts[count].name %>" class="btn btn-warning">
+                    <i class="fa fa-pencil-square-o">
+                      Edit
+                    </i>
+                  </a>
+                  <a href="/delete/<%= contacts[count].name %>" type="button" class="btn btn-danger ">
+                    <i class="fa fa-trash"></i>
+                    Delete
+                  </a>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+  <% include ./common/footer.ejs %>

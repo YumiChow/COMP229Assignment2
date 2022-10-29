@@ -1,0 +1,59 @@
+/*
+  File Name: login.css
+  Student's Name: Yuchen Zhou
+  Student ID: 301188341
+  Date: 2022/10/29
+*/
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #409EFF;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 5px 5px  #79bbff;
+  padding: 32px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #409EFF;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-end;
+  margin-top: 32px;
+}
+
+.form-item {
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 20px;
+  padding-right: 6px;
+}
+
+input {
+  height: 20px;
+}
+
+#submit {
+  align-self: center;
+  border: none;
+  padding: 6px 12px;
+  background-color: #409EFF;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 2px;
+}
